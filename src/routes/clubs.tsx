@@ -8,7 +8,7 @@ export const Route = createFileRoute("/clubs")({
       {
         name: "description",
         content:
-          "Explore all student-run clubs and societies at Sai University for 2026–27.",
+          "Explore all student-run clubs and societies at Sai University.",
       },
     ],
   }),
@@ -50,7 +50,7 @@ function ClubsPage() {
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-10 bg-primary" />
             <span className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-              Sai University · 2026–2027
+              Sai University
             </span>
           </div>
 
@@ -70,7 +70,7 @@ function ClubsPage() {
       <footer className="py-10 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-display tracking-wide">
-            SAIU CLUBS · 2026–2027
+            SAIU CLUBS AND SOCIETIES
           </span>
 
           <p className="text-xs text-foreground/40">
