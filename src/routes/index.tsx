@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { clubs } from "@/data/clubs";
+import { supabase } from "@/lib/supabase";
 import clubSports from "@/assets/club-sports.jpg";
 import clubTech from "@/assets/club-tech.jpg";
 import clubArts from "@/assets/club-arts.jpg";
@@ -61,7 +62,6 @@ function Index() {
       {/* ========================= */}
       {/* HEADER */}
       {/* ========================= */}
-
       <header className="fixed top-0 inset-x-0 z-50 bg-background/95 border-b border-border backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3">
@@ -70,7 +70,6 @@ function Index() {
                 S
               </span>
             </div>
-
             <span className="font-display tracking-wide text-lg">
               SAIU CLUBS AND SOCIETIES
             </span>
@@ -102,7 +101,6 @@ function Index() {
       {/* ========================= */}
       {/* HERO */}
       {/* ========================= */}
-
       <main className="pt-16">
         <section className="relative py-24 md:py-32 overflow-hidden">
           <div
@@ -118,7 +116,6 @@ function Index() {
           <div className="max-w-7xl mx-auto px-6 relative">
             <div className="max-w-5xl">
               {/* Small heading */}
-
               <div className="flex items-center gap-3 mb-7">
                 <span className="h-px w-12 bg-primary" />
 
@@ -128,7 +125,6 @@ function Index() {
               </div>
 
               {/* Main heading */}
-
               <h1 className="font-display leading-[0.82] text-[clamp(3.5rem,11vw,10rem)] uppercase">
                 <span className="block">
                   Find your
@@ -140,7 +136,6 @@ function Index() {
               </h1>
 
               {/* HERO DESCRIPTION */}
-
               <p className="mt-10 text-lg md:text-xl text-foreground/70 max-w-3xl leading-relaxed">
                 21 student-run clubs and societies, one campus. Pick a lane,
                 meet the leads, and be part of something the whole university
@@ -151,7 +146,6 @@ function Index() {
             {/* ========================= */}
             {/* STATS */}
             {/* ========================= */}
-
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border max-w-4xl">
               <div className="bg-background p-6 md:p-8">
                 <div className="font-display text-5xl md:text-6xl text-primary">
@@ -185,7 +179,6 @@ function Index() {
             </div>
 
             {/* Apply Button */}
-
             <div className="mt-10">
               <button
                 type="button"
@@ -675,7 +668,6 @@ function Index() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close */}
-
             <button
               type="button"
               onClick={() => setShowApplyForm(false)}
@@ -686,7 +678,6 @@ function Index() {
             </button>
 
             {/* Form heading */}
-
             <div className="mb-8 pr-8">
               <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
                 Sai University
@@ -706,17 +697,52 @@ function Index() {
             </div>
 
             {/* Form */}
-
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                alert("Application submitted successfully!");
+
+                const formData = new FormData(e.currentTarget);
+
+                const { error } = await supabase
+                  .from("club_applications")
+                  .insert({
+                    student_name: String(
+                      formData.get("studentName") ?? ""
+                    ),
+                    email: String(
+                      formData.get("email") ?? ""
+                    ),
+                    school: String(
+                      formData.get("school") ?? ""
+                    ),
+                    year: String(
+                      formData.get("year") ?? ""
+                    ),
+                    club: String(
+                      formData.get("club") ?? ""
+                    ),
+                    experience: String(
+                      formData.get("experience") ?? ""
+                    ),
+                  });
+
+                if (error) {
+                  console.error(error);
+                  alert(
+                    "Something went wrong. Please try again."
+                  );
+                  return;
+                }
+
+                alert(
+                  "Application submitted successfully!"
+                );
+
                 setShowApplyForm(false);
               }}
               className="space-y-6"
             >
               {/* Student Name */}
-
               <div>
                 <label
                   htmlFor="student-name"
@@ -736,7 +762,6 @@ function Index() {
               </div>
 
               {/* Email */}
-
               <div>
                 <label
                   htmlFor="student-email"
@@ -756,7 +781,6 @@ function Index() {
               </div>
 
               {/* School */}
-
               <div>
                 <label
                   htmlFor="school"
@@ -788,7 +812,6 @@ function Index() {
               </div>
 
               {/* Year */}
-
               <div>
                 <label
                   htmlFor="year"
@@ -827,7 +850,6 @@ function Index() {
               </div>
 
               {/* Club / Society */}
-
               <div>
                 <label
                   htmlFor="club"
@@ -859,7 +881,6 @@ function Index() {
               </div>
 
               {/* Experience */}
-
               <div>
                 <label
                   htmlFor="experience"
@@ -884,7 +905,6 @@ function Index() {
               </div>
 
               {/* Submit */}
-
               <button
                 type="submit"
                 className="w-full bg-primary text-primary-foreground font-display tracking-wide py-4 text-base hover:opacity-90 transition"
