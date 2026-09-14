@@ -9,29 +9,25 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "SaiU Clubs and Societies · 2026–27",
+        title: "SaiU Clubs and Societies",
       },
       {
         name: "description",
         content:
-          "Explore the clubs and societies at Sai University for the 2026–27 academic year.",
+          "Explore the clubs and societies at Sai University.",
       },
       {
         property: "og:title",
-        content: "SaiU Clubs and Societies · 2026–27",
+        content: "SaiU Clubs and Societies",
       },
       {
         property: "og:description",
         content:
-          "Explore clubs and societies at Sai University and find the room you belong in.",
+          "Find the room you belong in at Sai University.",
       },
       {
         property: "og:type",
         content: "website",
-      },
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
       },
     ],
   }),
@@ -62,7 +58,9 @@ const featured = [
 function Index() {
   const [showApplyForm, setShowApplyForm] = useState(false);
 
-  const categoryCount = new Set(clubs.map((club) => club.category)).size;
+  const categoryCount = new Set(
+    clubs.map((club) => club.category)
+  ).size;
 
   return (
     <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
@@ -74,6 +72,7 @@ function Index() {
       <header className="fixed top-0 inset-x-0 z-50 bg-background/95 border-b border-border backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
+          {/* Logo */}
           <a
             href="/"
             className="flex items-center gap-3"
@@ -89,6 +88,7 @@ function Index() {
             </span>
           </a>
 
+          {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/70">
 
             <a
@@ -133,11 +133,13 @@ function Index() {
 
         <section className="relative py-24 md:py-32 overflow-hidden">
 
+          {/* Blue background shape */}
           <div
             className="absolute inset-y-0 left-[-15%] w-[45%] bg-primary/10 -skew-x-12"
             aria-hidden="true"
           />
 
+          {/* Decorative circle */}
           <div
             className="absolute top-20 right-[-8%] w-80 h-80 border border-primary/20 rotate-12 rounded-full"
             aria-hidden="true"
@@ -147,20 +149,33 @@ function Index() {
 
             <div className="max-w-5xl">
 
+              {/* Small heading */}
               <div className="flex items-center gap-3 mb-7">
+
                 <span className="h-px w-12 bg-primary" />
 
                 <span className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-                  Sai University · Clubs & Societies · 2026–27
+                  Sai University Student Activity
                 </span>
+
               </div>
 
-              <h1 className="font-display uppercase leading-[0.85] text-[clamp(3.5rem,9vw,8.5rem)]">
-                Find the room
-                <br />
-                you belong in.
+
+              {/* Main heading */}
+              <h1 className="font-display leading-[0.82] text-[clamp(3.5rem,11vw,10rem)] uppercase">
+
+                <span className="block">
+                  Find your
+                </span>
+
+                <span className="block text-primary -skew-x-6 inline-block bg-background px-2">
+                  Tribe
+                </span>
+
               </h1>
 
+
+              {/* Hero description */}
               <p className="mt-10 text-lg md:text-xl text-foreground/70 max-w-3xl leading-relaxed">
                 Twenty clubs, Six worlds.{" "}
                 <strong className="text-foreground">
@@ -173,11 +188,15 @@ function Index() {
             </div>
 
 
-            {/* Stats */}
+            {/* ========================= */}
+            {/* STATS */}
+            {/* ========================= */}
 
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border max-w-4xl">
 
+              {/* Clubs */}
               <div className="bg-background p-6 md:p-8">
+
                 <div className="font-display text-5xl md:text-6xl text-primary">
                   20
                 </div>
@@ -185,9 +204,13 @@ function Index() {
                 <div className="text-xs tracking-[0.2em] uppercase text-foreground/50 mt-2">
                   Clubs
                 </div>
+
               </div>
 
+
+              {/* Categories */}
               <div className="bg-background p-6 md:p-8">
+
                 <div className="font-display text-5xl md:text-6xl">
                   6
                 </div>
@@ -195,9 +218,13 @@ function Index() {
                 <div className="text-xs tracking-[0.2em] uppercase text-foreground/50 mt-2">
                   Categories
                 </div>
+
               </div>
 
+
+              {/* Experience */}
               <div className="bg-background p-6 md:p-8">
+
                 <div className="font-display text-5xl md:text-6xl text-primary">
                   0
                 </div>
@@ -205,12 +232,13 @@ function Index() {
                 <div className="text-xs tracking-[0.2em] uppercase text-foreground/50 mt-2">
                   Experience Required for Most
                 </div>
+
               </div>
 
             </div>
 
 
-            {/* Apply */}
+            {/* Apply Button */}
 
             <div className="mt-10">
 
@@ -249,6 +277,7 @@ function Index() {
                 </h2>
 
               </div>
+
 
               <div className="text-foreground/70 text-base md:text-lg leading-relaxed space-y-6">
 
@@ -289,7 +318,7 @@ function Index() {
 
 
         {/* ========================= */}
-        {/* WHY JOIN */}
+        {/* WHY JOIN A CLUB */}
         {/* ========================= */}
 
         <section className="py-20 md:py-28 bg-card">
@@ -310,6 +339,7 @@ function Index() {
 
               </div>
 
+
               <div>
 
                 <p className="text-foreground/70 text-base md:text-lg leading-relaxed mb-10">
@@ -319,9 +349,11 @@ function Index() {
                   coursework — here's what that commitment tends to give back.
                 </p>
 
+
                 <div className="space-y-8">
 
                   <div className="border-l-2 border-primary pl-6">
+
                     <h3 className="font-semibold text-lg">
                       A standing reason to leave your room.
                     </h3>
@@ -331,10 +363,12 @@ function Index() {
                       deadlines — a recurring reason to show up, even on the
                       days motivation is low.
                     </p>
+
                   </div>
 
 
                   <div className="border-l-2 border-primary pl-6">
+
                     <h3 className="font-semibold text-lg">
                       Skills you won't get from a syllabus.
                     </h3>
@@ -344,10 +378,12 @@ function Index() {
                       editing a reel under deadline — the kind of practical
                       skill that rarely fits into a course outline.
                     </p>
+
                   </div>
 
 
                   <div className="border-l-2 border-primary pl-6">
+
                     <h3 className="font-semibold text-lg">
                       A social circle you didn't inherit.
                     </h3>
@@ -358,10 +394,12 @@ function Index() {
                       durable friendships on campus start at a club meeting,
                       not a classroom.
                     </p>
+
                   </div>
 
 
                   <div className="border-l-2 border-primary pl-6">
+
                     <h3 className="font-semibold text-lg">
                       A low-stakes place to be a beginner again.
                     </h3>
@@ -371,10 +409,12 @@ function Index() {
                       zero experience. Trying something new here costs a lot
                       less than trying it for the first time professionally.
                     </p>
+
                   </div>
 
 
                   <div className="border-l-2 border-primary pl-6">
+
                     <h3 className="font-semibold text-lg">
                       Something to point to later.
                     </h3>
@@ -385,6 +425,7 @@ function Index() {
                       student's resume, because it shows follow-through rather
                       than credentials.
                     </p>
+
                   </div>
 
                 </div>
@@ -419,6 +460,7 @@ function Index() {
                 </h2>
 
               </div>
+
 
               <div className="space-y-7">
 
@@ -544,10 +586,14 @@ function Index() {
                 </span>
 
                 <h2 className="font-display text-5xl md:text-6xl uppercase leading-none mt-2">
-                  Featured <span className="text-primary">Lanes</span>
+                  Featured{" "}
+                  <span className="text-primary">
+                    Lanes
+                  </span>
                 </h2>
 
               </div>
+
 
               <a
                 href="/featured"
@@ -645,26 +691,17 @@ function Index() {
 
           <div className="max-w-5xl mx-auto px-6 relative">
 
-            <div className="flex items-end justify-between gap-6">
-
-              <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.85]">
-                Three moves to{" "}
-                <span className="bg-background text-primary px-2 -skew-x-6 inline-block">
-                  your club
-                </span>
-              </h2>
-
-              <a
-                href="/how-to-join"
-                className="hidden md:block text-sm font-semibold text-primary-foreground hover:opacity-70 transition"
-              >
-                Full guide →
-              </a>
-
-            </div>
+            <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.85]">
+              Three moves to{" "}
+              <span className="bg-background text-primary px-2 -skew-x-6 inline-block">
+                your club
+              </span>
+            </h2>
 
 
             <div className="mt-12 grid md:grid-cols-3 gap-6">
+
+              {/* 01 */}
 
               <div className="bg-background text-foreground p-7 -skew-x-3">
 
@@ -684,6 +721,8 @@ function Index() {
               </div>
 
 
+              {/* 02 */}
+
               <div className="bg-background text-foreground p-7 -skew-x-3 translate-y-6">
 
                 <div className="font-display text-5xl text-primary">
@@ -701,6 +740,8 @@ function Index() {
 
               </div>
 
+
+              {/* 03 */}
 
               <div className="bg-background text-foreground p-7 -skew-x-3">
 
@@ -721,18 +762,6 @@ function Index() {
 
             </div>
 
-
-            <div className="mt-10 md:hidden">
-
-              <a
-                href="/how-to-join"
-                className="text-sm font-semibold"
-              >
-                Read the full guide →
-              </a>
-
-            </div>
-
           </div>
 
         </section>
@@ -747,7 +776,7 @@ function Index() {
           <div className="max-w-5xl mx-auto px-6 text-center">
 
             <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
-              2026–27
+              Sai University
             </p>
 
             <h2 className="font-display text-5xl md:text-7xl uppercase leading-none mt-3">
@@ -758,6 +787,7 @@ function Index() {
               Explore the clubs and societies, understand what they ask of
               you, and choose the ones worth showing up for.
             </p>
+
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
 
@@ -796,16 +826,19 @@ function Index() {
           <div className="flex items-center gap-3">
 
             <div className="w-7 h-7 bg-primary grid place-items-center -skew-x-12">
+
               <span className="skew-x-12 font-display text-primary-foreground text-sm leading-none">
                 S
               </span>
+
             </div>
 
             <span className="font-display tracking-wide">
-              SAIU CLUBS AND SOCIETIES · 2026–27
+              SAIU CLUBS AND SOCIETIES
             </span>
 
           </div>
+
 
           <p className="text-xs text-foreground/40">
             Sai University · Student Clubs & Societies
@@ -817,10 +850,11 @@ function Index() {
 
 
       {/* ========================= */}
-      {/* APPLICATION FORM */}
+      {/* APPLICATION FORM MODAL */}
       {/* ========================= */}
 
       {showApplyForm && (
+
         <div
           className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
           onClick={() => setShowApplyForm(false)}
@@ -843,16 +877,19 @@ function Index() {
             </button>
 
 
-            {/* Heading */}
+            {/* Form heading */}
 
             <div className="mb-8 pr-8">
 
               <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
-                Sai University · 2026–27
+                Sai University
               </span>
 
               <h2 className="font-display text-4xl md:text-5xl uppercase leading-none mt-3">
-                Apply for a <span className="text-primary">Club</span>
+                Apply for a{" "}
+                <span className="text-primary">
+                  Club
+                </span>
               </h2>
 
               <p className="text-foreground/60 text-sm mt-3">
@@ -868,7 +905,9 @@ function Index() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+
                 alert("Application submitted successfully!");
+
                 setShowApplyForm(false);
               }}
               className="space-y-6"
@@ -1001,7 +1040,7 @@ function Index() {
               </div>
 
 
-              {/* Club */}
+              {/* Club / Society */}
 
               <div>
 
@@ -1080,6 +1119,7 @@ function Index() {
           </div>
 
         </div>
+
       )}
 
     </div>
