@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { ClubDirectory } from "@/components/ClubDirectory";
 import { clubs } from "@/data/clubs";
 import clubSports from "@/assets/club-sports.jpg";
@@ -51,6 +52,8 @@ const featured = [
 ];
 
 function Index() {
+  const [showApplyForm, setShowApplyForm] = useState(false);
+
   return (
     <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
       {/* Header */}
@@ -62,25 +65,33 @@ function Index() {
                 S
               </span>
             </div>
-            <span className="font-display tracking-wide text-lg">SAIU CLUBS</span>
+
+            <span className="font-display tracking-wide text-lg">
+              SAIU CLUBS
+            </span>
           </div>
+
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/70">
-            <a className="hover:text-primary transition" href="#clubs">
+            <a className="hover:text-primary transition" href="/clubs">
               Clubs
             </a>
-            <a className="hover:text-primary transition" href="#featured">
+
+            <a className="hover:text-primary transition" href="/featured">
               Featured
             </a>
-            <a className="hover:text-primary transition" href="#join">
+
+            <a className="hover:text-primary transition" href="/how-to-join">
               How to join
             </a>
           </nav>
-          <a
-            href="#join"
+
+          <button
+            type="button"
+            onClick={() => setShowApplyForm(true)}
             className="bg-primary text-primary-foreground font-display tracking-wide px-5 py-2 -skew-x-12 text-sm"
           >
             <span className="inline-block skew-x-12">JOIN NOW</span>
-          </a>
+          </button>
         </div>
       </header>
 
@@ -90,67 +101,88 @@ function Index() {
           className="absolute inset-y-0 left-[-10%] w-[45%] bg-primary/10 -skew-x-12"
           aria-hidden="true"
         />
+
         <div
           className="absolute top-10 right-[-6%] w-72 h-72 border-2 border-border rotate-12 rounded-full"
           aria-hidden="true"
         />
+
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-10 bg-primary" />
+
             <span className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
               Sai University Student Activity · 2026–27
             </span>
           </div>
+
           <h1 className="font-display leading-[0.82] text-[clamp(3.5rem,11vw,10rem)] uppercase">
             <span className="block">Find your</span>
+
             <span className="block text-primary -skew-x-6 inline-block bg-background px-2">
               Tribe
             </span>
+
             <span className="block">2026–27</span>
           </h1>
+
           <div className="mt-10 grid md:grid-cols-2 gap-8 items-end">
             <p className="text-foreground/70 text-lg max-w-md">
-              {clubs.length} student-run clubs and societies, one campus. Pick a lane,
-              meet the leads, and be part of something the whole university remembers.
+              {clubs.length} student-run clubs and societies, one campus. Pick
+              a lane, meet the leads, and be part of something the whole
+              university remembers.
             </p>
+
             <div className="flex flex-wrap gap-4">
               <a
-                href="#clubs"
+                href="/clubs"
                 className="bg-primary text-primary-foreground font-display tracking-wide px-7 py-4 -skew-x-12 text-base"
               >
                 <span className="inline-block skew-x-12">
                   Browse {clubs.length} clubs
                 </span>
               </a>
-              <a
-                href="#join"
+
+              <button
+                type="button"
+                onClick={() => setShowApplyForm(true)}
                 className="border border-border px-7 py-4 font-semibold text-base hover:border-primary hover:text-primary transition"
               >
                 Apply for 2026–27
-              </a>
+              </button>
             </div>
           </div>
+
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-border border border-border">
             <div className="bg-background p-5">
-              <div className="font-display text-4xl text-primary">{clubs.length}</div>
+              <div className="font-display text-4xl text-primary">
+                {clubs.length}
+              </div>
+
               <div className="text-xs text-foreground/60 mt-1 tracking-wide uppercase">
                 Active Clubs
               </div>
             </div>
+
             <div className="bg-background p-5">
               <div className="font-display text-4xl">{categoryCount}</div>
+
               <div className="text-xs text-foreground/60 mt-1 tracking-wide uppercase">
                 Categories
               </div>
             </div>
+
             <div className="bg-background p-5">
               <div className="font-display text-4xl text-primary">Open</div>
+
               <div className="text-xs text-foreground/60 mt-1 tracking-wide uppercase">
                 To All Students
               </div>
             </div>
+
             <div className="bg-background p-5">
               <div className="font-display text-4xl">26–27</div>
+
               <div className="text-xs text-foreground/60 mt-1 tracking-wide uppercase">
                 Academic Year
               </div>
@@ -165,6 +197,7 @@ function Index() {
           <h2 className="font-display text-5xl uppercase leading-none mb-10">
             Featured <span className="text-primary">Lanes</span>
           </h2>
+
           <div className="grid md:grid-cols-3 gap-6">
             {featured.map((f) => (
               <article
@@ -179,15 +212,23 @@ function Index() {
                   height={768}
                   className="w-full aspect-[4/3] object-cover"
                 />
+
                 <div className="p-6">
                   <span className="text-[11px] font-semibold tracking-[0.2em] text-primary uppercase">
                     {f.category}
                   </span>
-                  <h3 className="font-display text-2xl uppercase mt-2">{f.title}</h3>
-                  <p className="text-foreground/60 text-sm mt-2">{f.body}</p>
+
+                  <h3 className="font-display text-2xl uppercase mt-2">
+                    {f.title}
+                  </h3>
+
+                  <p className="text-foreground/60 text-sm mt-2">
+                    {f.body}
+                  </p>
+
                   <div className="mt-5 flex justify-end">
                     <a
-                      href="#clubs"
+                      href="/featured"
                       className="text-primary font-semibold text-sm group-hover:translate-x-1 transition"
                     >
                       Explore →
@@ -203,7 +244,10 @@ function Index() {
       <ClubDirectory />
 
       {/* How to join */}
-      <section id="join" className="relative py-24 bg-primary text-primary-foreground overflow-hidden">
+      <section
+        id="join"
+        className="relative py-24 bg-primary text-primary-foreground overflow-hidden"
+      >
         <div
           className="absolute inset-0 opacity-10"
           aria-hidden="true"
@@ -212,6 +256,7 @@ function Index() {
               "repeating-linear-gradient(45deg,#0a0a0a 0 2px,transparent 2px 22px)",
           }}
         />
+
         <div className="max-w-5xl mx-auto px-6 relative">
           <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.85]">
             Three moves to{" "}
@@ -219,34 +264,208 @@ function Index() {
               your club
             </span>
           </h2>
+
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             <div className="bg-background text-foreground p-7 -skew-x-3">
               <div className="font-display text-5xl text-primary">01</div>
-              <h3 className="font-display text-2xl uppercase mt-3">Pick a club</h3>
+
+              <h3 className="font-display text-2xl uppercase mt-3">
+                Pick a club
+              </h3>
+
               <p className="text-foreground/60 text-sm mt-2">
-                Search all {clubs.length} clubs by interest above. Most are open to
-                every student — mix and match as many as you want.
+                Search all {clubs.length} clubs by interest above. Most are
+                open to every student — mix and match as many as you want.
               </p>
             </div>
+
             <div className="bg-background text-foreground p-7 -skew-x-3 translate-y-6">
               <div className="font-display text-5xl text-primary">02</div>
-              <h3 className="font-display text-2xl uppercase mt-3">Reach out</h3>
+
+              <h3 className="font-display text-2xl uppercase mt-3">
+                Reach out
+              </h3>
+
               <p className="text-foreground/60 text-sm mt-2">
-                Open a club's page for the president's email and social links. Some
-                clubs run a quick selection — details are listed on each card.
+                Open a club's page for the president's email and social links.
+                Some clubs run a quick selection — details are listed on each
+                card.
               </p>
             </div>
+
             <div className="bg-background text-foreground p-7 -skew-x-3">
               <div className="font-display text-5xl text-primary">03</div>
-              <h3 className="font-display text-2xl uppercase mt-3">Show up</h3>
+
+              <h3 className="font-display text-2xl uppercase mt-3">
+                Show up
+              </h3>
+
               <p className="text-foreground/60 text-sm mt-2">
-                Attend the first session and your spot is confirmed for 2026–27.
-                Beginners are welcome almost everywhere.
+                Attend the first session and your spot is confirmed for
+                2026–27. Beginners are welcome almost everywhere.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Application Form */}
+      {showApplyForm && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
+          onClick={() => setShowApplyForm(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-background border border-border p-8 md:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowApplyForm(false)}
+              className="absolute top-5 right-5 text-foreground/60 hover:text-primary text-2xl"
+              aria-label="Close application form"
+            >
+              ×
+            </button>
+
+            <div className="mb-8">
+              <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
+                Sai University · 2026–27
+              </span>
+
+              <h2 className="font-display text-4xl md:text-5xl uppercase leading-none mt-3">
+                Apply for <span className="text-primary">2026–27</span>
+              </h2>
+
+              <p className="text-foreground/60 text-sm mt-4 max-w-xl">
+                Tell us a little about yourself. This information will help us
+                understand who is interested in joining the student clubs and
+                societies.
+              </p>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Application submitted successfully!");
+                setShowApplyForm(false);
+              }}
+              className="space-y-6"
+            >
+              {/* Student Name */}
+              <div>
+                <label className="block text-sm font-semibold mb-2">
+                  Student Name
+                </label>
+
+                <input
+                  type="text"
+                  name="studentName"
+                  required
+                  placeholder="Enter your full name"
+                  className="w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold mb-2">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your university email"
+                  className="w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary"
+                />
+              </div>
+
+              {/* School */}
+              <div>
+                <label className="block text-sm font-semibold mb-2">
+                  School
+                </label>
+
+                <select
+                  name="school"
+                  required
+                  defaultValue=""
+                  className="w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary"
+                >
+                  <option value="" disabled>
+                    Select your school
+                  </option>
+
+                  <option value="SAS">SAS</option>
+                  <option value="SOL">SOL</option>
+                  <option value="SCDS">SCDS</option>
+                  <option value="SOB">SOB</option>
+                  <option value="SOT">SOT</option>
+                  <option value="SOAI">SOAI</option>
+                  <option value="SAHS">SAHS</option>
+                  <option value="SOM">SOM</option>
+                </select>
+              </div>
+
+              {/* Year */}
+              <div>
+                <label className="block text-sm font-semibold mb-2">
+                  Year
+                </label>
+
+                <select
+                  name="year"
+                  required
+                  defaultValue=""
+                  className="w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary"
+                >
+                  <option value="" disabled>
+                    Select your batch
+                  </option>
+
+                  <option value="2023-2027">2023–2027</option>
+                  <option value="2024-2028">2024–2028</option>
+                  <option value="2025-2029">2025–2029</option>
+                  <option value="2026-2030">2026–2030</option>
+                </select>
+              </div>
+
+              {/* Experience */}
+              <div>
+                <label className="block text-sm font-semibold mb-2">
+                  Experience
+                </label>
+
+                <p className="text-xs text-foreground/50 mb-2">
+                  Briefly describe any relevant experience, skills, projects,
+                  competitions, performances, or activities. If you don't have
+                  any prior experience, you can simply write "No prior
+                  experience."
+                </p>
+
+                <textarea
+                  name="experience"
+                  rows={5}
+                  placeholder="Tell us briefly about your experience..."
+                  className="w-full border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary resize-none"
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="w-full bg-primary text-primary-foreground font-display tracking-wide px-7 py-4 -skew-x-3 text-base hover:opacity-90 transition"
+              >
+                <span className="inline-block skew-x-3">
+                  Submit Application
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="py-10 bg-background border-t border-border">
@@ -257,8 +476,12 @@ function Index() {
                 S
               </span>
             </div>
-            <span className="font-display tracking-wide">SAIU CLUBS · 2026–27</span>
+
+            <span className="font-display tracking-wide">
+              SAIU CLUBS · 2026–27
+            </span>
           </div>
+
           <p className="text-xs text-foreground/40">
             Built for {clubs.length} clubs and one loud campus — Sai University.
           </p>
