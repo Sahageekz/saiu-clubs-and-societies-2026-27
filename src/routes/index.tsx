@@ -13,8 +13,7 @@ export const Route = createFileRoute("/")({
       },
       {
         name: "description",
-        content:
-          "Explore the clubs and societies at Sai University.",
+        content: "Explore the clubs and societies at Sai University.",
       },
       {
         property: "og:title",
@@ -22,8 +21,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:description",
-        content:
-          "Find the room you belong in at Sai University.",
+        content: "Find the room you belong in at Sai University.",
       },
       {
         property: "og:type",
@@ -58,10 +56,6 @@ const featured = [
 function Index() {
   const [showApplyForm, setShowApplyForm] = useState(false);
 
-  const categoryCount = new Set(
-    clubs.map((club) => club.category)
-  ).size;
-
   return (
     <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
 
@@ -72,7 +66,6 @@ function Index() {
       <header className="fixed top-0 inset-x-0 z-50 bg-background/95 border-b border-border backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-          {/* Logo */}
           <a
             href="/"
             className="flex items-center gap-3"
@@ -88,7 +81,6 @@ function Index() {
             </span>
           </a>
 
-          {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground/70">
 
             <a
@@ -133,13 +125,11 @@ function Index() {
 
         <section className="relative py-24 md:py-32 overflow-hidden">
 
-          {/* Blue background shape */}
           <div
             className="absolute inset-y-0 left-[-15%] w-[45%] bg-primary/10 -skew-x-12"
             aria-hidden="true"
           />
 
-          {/* Decorative circle */}
           <div
             className="absolute top-20 right-[-8%] w-80 h-80 border border-primary/20 rotate-12 rounded-full"
             aria-hidden="true"
@@ -149,7 +139,6 @@ function Index() {
 
             <div className="max-w-5xl">
 
-              {/* Small heading */}
               <div className="flex items-center gap-3 mb-7">
 
                 <span className="h-px w-12 bg-primary" />
@@ -161,7 +150,6 @@ function Index() {
               </div>
 
 
-              {/* Main heading */}
               <h1 className="font-display leading-[0.82] text-[clamp(3.5rem,11vw,10rem)] uppercase">
 
                 <span className="block">
@@ -175,14 +163,17 @@ function Index() {
               </h1>
 
 
-              {/* Hero description */}
               <p className="mt-10 text-lg md:text-xl text-foreground/70 max-w-3xl leading-relaxed">
+
                 Twenty clubs, Six worlds.{" "}
+
                 <strong className="text-foreground">
                   Before you sign up at a table,
                 </strong>{" "}
+
                 read what actually happens inside each one — what it asks of
                 you, what it gives back, and who tends to stay.
+
               </p>
 
             </div>
@@ -194,21 +185,19 @@ function Index() {
 
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border max-w-4xl">
 
-              {/* Clubs */}
               <div className="bg-background p-6 md:p-8">
 
                 <div className="font-display text-5xl md:text-6xl text-primary">
-                  20
+                  21
                 </div>
 
                 <div className="text-xs tracking-[0.2em] uppercase text-foreground/50 mt-2">
-                  Clubs
+                  Active Clubs
                 </div>
 
               </div>
 
 
-              {/* Categories */}
               <div className="bg-background p-6 md:p-8">
 
                 <div className="font-display text-5xl md:text-6xl">
@@ -222,15 +211,14 @@ function Index() {
               </div>
 
 
-              {/* Experience */}
               <div className="bg-background p-6 md:p-8">
 
                 <div className="font-display text-5xl md:text-6xl text-primary">
-                  0
+                  Open
                 </div>
 
                 <div className="text-xs tracking-[0.2em] uppercase text-foreground/50 mt-2">
-                  Experience Required for Most
+                  To All Students
                 </div>
 
               </div>
@@ -253,6 +241,7 @@ function Index() {
             </div>
 
           </div>
+
         </section>
 
 
@@ -318,7 +307,7 @@ function Index() {
 
 
         {/* ========================= */}
-        {/* WHY JOIN A CLUB */}
+        {/* WHY JOIN */}
         {/* ========================= */}
 
         <section className="py-20 md:py-28 bg-card">
@@ -471,13 +460,16 @@ function Index() {
                   </span>
 
                   <p className="text-foreground/70 leading-relaxed">
+
                     <strong className="text-foreground">
                       Start with what you already do,
                     </strong>{" "}
+
                     not what looks impressive. If you already play chess in
                     your free time or spend evenings editing photos, that's a
                     stronger signal than a club that sounds good on paper but
                     has nothing to do with how you actually spend your time.
+
                   </p>
 
                 </div>
@@ -490,13 +482,16 @@ function Index() {
                   </span>
 
                   <p className="text-foreground/70 leading-relaxed">
+
                     <strong className="text-foreground">
                       Read the time commitment before the highlight reel.
                     </strong>{" "}
+
                     A club's achievements page will always look exciting.
                     What matters for your semester is whether "varies by
                     event" or "2–4 hours a week" actually fits around the rest
                     of your schedule.
+
                   </p>
 
                 </div>
@@ -509,13 +504,16 @@ function Index() {
                   </span>
 
                   <p className="text-foreground/70 leading-relaxed">
+
                     <strong className="text-foreground">
                       Check whether there's a selection process.
                     </strong>{" "}
+
                     Some clubs are open to everyone; others run auditions,
                     interviews or portfolio reviews. Neither is better — but
                     knowing which one you're walking into changes how you
                     prepare.
+
                   </p>
 
                 </div>
@@ -528,13 +526,16 @@ function Index() {
                   </span>
 
                   <p className="text-foreground/70 leading-relaxed">
+
                     <strong className="text-foreground">
                       Weigh experience requirements honestly.
                     </strong>{" "}
+
                     A handful of clubs in this directory expect prior
                     experience. Most explicitly don't. If you're a beginner,
                     look for that phrase rather than talking yourself out of
                     trying.
+
                   </p>
 
                 </div>
@@ -547,12 +548,15 @@ function Index() {
                   </span>
 
                   <p className="text-foreground/70 leading-relaxed">
+
                     <strong className="text-foreground">
                       Don't over-commit in week one.
                     </strong>{" "}
+
                     It's tempting to sign up for five clubs during fair week.
                     Most students get more out of two clubs they actually
                     attend than five they quietly drop by October.
+
                   </p>
 
                 </div>
@@ -586,10 +590,13 @@ function Index() {
                 </span>
 
                 <h2 className="font-display text-5xl md:text-6xl uppercase leading-none mt-2">
+
                   Featured{" "}
+
                   <span className="text-primary">
                     Lanes
                   </span>
+
                 </h2>
 
               </div>
@@ -608,6 +615,7 @@ function Index() {
             <div className="grid md:grid-cols-3 gap-6">
 
               {featured.map((item) => (
+
                 <article
                   key={item.title}
                   className="group bg-background border border-border hover:border-primary transition overflow-hidden"
@@ -650,6 +658,7 @@ function Index() {
                   </div>
 
                 </article>
+
               ))}
 
             </div>
@@ -692,16 +701,17 @@ function Index() {
           <div className="max-w-5xl mx-auto px-6 relative">
 
             <h2 className="font-display text-5xl md:text-6xl uppercase leading-[0.85]">
+
               Three moves to{" "}
+
               <span className="bg-background text-primary px-2 -skew-x-6 inline-block">
                 your club
               </span>
+
             </h2>
 
 
             <div className="mt-12 grid md:grid-cols-3 gap-6">
-
-              {/* 01 */}
 
               <div className="bg-background text-foreground p-7 -skew-x-3">
 
@@ -721,8 +731,6 @@ function Index() {
               </div>
 
 
-              {/* 02 */}
-
               <div className="bg-background text-foreground p-7 -skew-x-3 translate-y-6">
 
                 <div className="font-display text-5xl text-primary">
@@ -740,8 +748,6 @@ function Index() {
 
               </div>
 
-
-              {/* 03 */}
 
               <div className="bg-background text-foreground p-7 -skew-x-3">
 
@@ -850,7 +856,7 @@ function Index() {
 
 
       {/* ========================= */}
-      {/* APPLICATION FORM MODAL */}
+      {/* APPLICATION FORM */}
       {/* ========================= */}
 
       {showApplyForm && (
@@ -865,8 +871,6 @@ function Index() {
             onClick={(e) => e.stopPropagation()}
           >
 
-            {/* Close */}
-
             <button
               type="button"
               onClick={() => setShowApplyForm(false)}
@@ -877,8 +881,6 @@ function Index() {
             </button>
 
 
-            {/* Form heading */}
-
             <div className="mb-8 pr-8">
 
               <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
@@ -886,10 +888,13 @@ function Index() {
               </span>
 
               <h2 className="font-display text-4xl md:text-5xl uppercase leading-none mt-3">
+
                 Apply for a{" "}
+
                 <span className="text-primary">
                   Club
                 </span>
+
               </h2>
 
               <p className="text-foreground/60 text-sm mt-3">
@@ -899,8 +904,6 @@ function Index() {
 
             </div>
 
-
-            {/* Form */}
 
             <form
               onSubmit={(e) => {
