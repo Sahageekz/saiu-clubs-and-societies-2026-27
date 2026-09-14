@@ -25,6 +25,11 @@ function Management() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Keeps track of which student's details are currently open
+  const [expandedApplicationId, setExpandedApplicationId] = useState<
+    string | null
+  >(null);
+
   useEffect(() => {
     const loadApplications = async () => {
       setLoading(true);
@@ -46,9 +51,11 @@ function Management() {
 
       if (error) {
         console.error(error);
+
         setError(
           "Unable to load applications. Please check your permissions."
         );
+
         setLoading(false);
         return;
       }
@@ -84,6 +91,12 @@ function Management() {
   };
 
   const totalApplications = applications.length;
+
+  const toggleApplication = (applicationId: string) => {
+    setExpandedApplicationId((currentId) =>
+      currentId === applicationId ? null : applicationId
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -126,7 +139,7 @@ function Management() {
       {/* ========================= */}
 
       <main className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        {/* Page heading */}
+        {/* PAGE HEADING */}
 
         <div className="mb-12">
           <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
@@ -160,7 +173,7 @@ function Management() {
           </div>
         </div>
 
-        {/* Loading */}
+        {/* LOADING */}
 
         {loading && (
           <div className="border border-border bg-card p-10 text-center">
@@ -174,7 +187,7 @@ function Management() {
           </div>
         )}
 
-        {/* Error */}
+        {/* ERROR */}
 
         {!loading && error && (
           <div className="border border-red-500/40 bg-red-500/10 p-8">
@@ -203,7 +216,7 @@ function Management() {
                   key={club.id}
                   className="border border-border bg-card overflow-hidden"
                 >
-                  {/* Club header */}
+                  {/* CLUB HEADER */}
 
                   <div className="border-b border-border p-6 bg-background">
                     <div className="flex items-start justify-between gap-4">
@@ -229,7 +242,7 @@ function Management() {
                     </p>
                   </div>
 
-                  {/* Applications */}
+                  {/* APPLICATION LIST */}
 
                   <div className="p-6">
                     {clubApplications.length === 0 ? (
@@ -244,67 +257,119 @@ function Management() {
                         </p>
                       </div>
                     ) : (
-                      <div className="space-y-5">
-                        {clubApplications.map((application) => (
-                          <article
-                            key={application.id}
-                            className="border border-border bg-background p-5"
-                          >
-                            <div className="flex items-start justify-between gap-4">
-                              <div>
-                                <h3 className="font-semibold text-lg">
-                                  {application.student_name}
-                                </h3>
+                      <div className="space-y-3">
+                        {clubApplications.map(
+                          (application, index) => {
+                            const isExpanded =
+                              expandedApplicationId ===
+                              application.id;
 
-                                <a
-                                  href={`mailto:${application.email}`}
-                                  className="text-sm text-primary hover:underline break-all"
+                            return (
+                              <div
+                                key={application.id}
+                                className="border border-border bg-background overflow-hidden"
+                              >
+                                {/* NAME ROW */}
+
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    toggleApplication(
+                                      application.id
+                                    )
+                                  }
+                                  className="w-full flex items-center gap-4 p-5 text-left hover:bg-card transition"
                                 >
-                                  {application.email}
-                                </a>
+                                  {/* S.NO */}
+
+                                  <span className="shrink-0 w-9 h-9 border border-primary text-primary grid place-items-center font-display text-lg">
+                                    {index + 1}
+                                  </span>
+
+                                  {/* NAME */}
+
+                                  <span className="flex-1 font-semibold text-base md:text-lg">
+                                    {application.student_name}
+                                  </span>
+
+                                  {/* ARROW */}
+
+                                  <span
+                                    className={`shrink-0 text-primary text-lg transition-transform ${
+                                      isExpanded
+                                        ? "rotate-180"
+                                        : ""
+                                    }`}
+                                  >
+                                    ↓
+                                  </span>
+                                </button>
+
+                                {/* DETAILS */}
+
+                                {isExpanded && (
+                                  <div className="border-t border-border p-5">
+                                    <div className="flex items-start justify-between gap-4">
+                                      <div>
+                                        <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
+                                          Email
+                                        </div>
+
+                                        <a
+                                          href={`mailto:${application.email}`}
+                                          className="text-sm text-primary hover:underline break-all mt-1 inline-block"
+                                        >
+                                          {application.email}
+                                        </a>
+                                      </div>
+
+                                      <span className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 whitespace-nowrap">
+                                        {new Date(
+                                          application.created_at
+                                        ).toLocaleDateString(
+                                          "en-IN"
+                                        )}
+                                      </span>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                                      <div className="border border-border p-4">
+                                        <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
+                                          School
+                                        </div>
+
+                                        <div className="font-semibold text-sm mt-1">
+                                          {application.school}
+                                        </div>
+                                      </div>
+
+                                      <div className="border border-border p-4">
+                                        <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
+                                          Batch
+                                        </div>
+
+                                        <div className="font-semibold text-sm mt-1">
+                                          {application.year}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-5">
+                                      <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
+                                        Experience
+                                      </div>
+
+                                      <p className="text-sm text-foreground/70 leading-relaxed mt-2 whitespace-pre-wrap">
+                                        {application.experience ||
+                                          "No experience provided."}
+                                      </p>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
-
-                              <span className="text-[10px] uppercase tracking-[0.15em] text-foreground/40 whitespace-nowrap">
-                                {new Date(
-                                  application.created_at
-                                ).toLocaleDateString("en-IN")}
-                              </span>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3 mt-5">
-                              <div className="border border-border p-3">
-                                <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
-                                  School
-                                </div>
-
-                                <div className="font-semibold text-sm mt-1">
-                                  {application.school}
-                                </div>
-                              </div>
-
-                              <div className="border border-border p-3">
-                                <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
-                                  Batch
-                                </div>
-
-                                <div className="font-semibold text-sm mt-1">
-                                  {application.year}
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="mt-5">
-                              <div className="text-[10px] uppercase tracking-[0.15em] text-foreground/40">
-                                Experience
-                              </div>
-
-                              <p className="text-sm text-foreground/70 leading-relaxed mt-2 whitespace-pre-wrap">
-                                {application.experience ||
-                                  "No experience provided."}
-                              </p>
-                            </div>
-                          </article>
-                        ))}
+                            );
+                          }
+                        )}
                       </div>
                     )}
                   </div>
