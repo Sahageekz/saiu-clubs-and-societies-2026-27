@@ -37,7 +37,7 @@ export function ClubDirectory() {
         {/* Page heading */}
         <div className="mb-10">
           <h2 className="font-display text-5xl uppercase leading-none mb-8">
-            All <span className="text-primary">Clubs</span>
+            All <span className="text-primary">Clubs and Societies</span>
           </h2>
 
           {/* Category + Search */}
