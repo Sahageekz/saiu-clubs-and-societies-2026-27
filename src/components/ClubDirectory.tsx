@@ -33,38 +33,41 @@ export function ClubDirectory() {
   return (
     <section id="clubs" className="py-20 bg-card">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <h2 className="font-display text-5xl uppercase leading-none">
+
+        {/* Page heading */}
+        <div className="mb-10">
+          <h2 className="font-display text-5xl uppercase leading-none mb-8">
             All <span className="text-primary">Clubs</span>
           </h2>
 
-          <div className="border border-border px-4 py-2 flex items-center gap-2 bg-background">
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search clubs…"
-              className="bg-transparent text-sm outline-none w-44 placeholder:text-muted-foreground"
-              aria-label="Search clubs"
-            />
+          {/* Category + Search */}
+          <div className="flex flex-col md:flex-row gap-4">
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full md:w-auto min-w-[320px] border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
+              aria-label="Select club category"
+            >
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+
+            <div className="border border-border px-4 py-3 flex items-center gap-2 bg-background flex-1 md:max-w-md">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search clubs…"
+                className="bg-transparent text-sm outline-none w-full placeholder:text-muted-foreground"
+                aria-label="Search clubs"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Club Category Dropdown */}
-        <div className="mb-10">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full md:w-auto min-w-[320px] border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
-            aria-label="Select club category"
-          >
-            {categories.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
-
+        {/* Clubs */}
         {filtered.length === 0 ? (
           <p className="text-muted-foreground text-sm">
             No clubs match your search.
@@ -110,6 +113,7 @@ export function ClubDirectory() {
         )}
       </div>
 
+      {/* Club details */}
       {selected && (
         <ClubDetail
           club={selected}
