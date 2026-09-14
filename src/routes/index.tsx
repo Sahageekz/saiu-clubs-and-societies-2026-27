@@ -70,6 +70,7 @@ function Index() {
                 S
               </span>
             </div>
+
             <span className="font-display tracking-wide text-lg">
               SAIU CLUBS AND SOCIETIES
             </span>
@@ -94,6 +95,13 @@ function Index() {
             >
               How to join
             </a>
+
+            <a
+              href="/login"
+              className="bg-primary text-primary-foreground px-5 py-2.5 font-semibold hover:opacity-90 transition"
+            >
+              LOGIN
+            </a>
           </nav>
         </div>
       </header>
@@ -115,7 +123,6 @@ function Index() {
 
           <div className="max-w-7xl mx-auto px-6 relative">
             <div className="max-w-5xl">
-              {/* Small heading */}
               <div className="flex items-center gap-3 mb-7">
                 <span className="h-px w-12 bg-primary" />
 
@@ -124,7 +131,6 @@ function Index() {
                 </span>
               </div>
 
-              {/* Main heading */}
               <h1 className="font-display leading-[0.82] text-[clamp(3.5rem,11vw,10rem)] uppercase">
                 <span className="block">
                   Find your
@@ -135,7 +141,6 @@ function Index() {
                 </span>
               </h1>
 
-              {/* HERO DESCRIPTION */}
               <p className="mt-10 text-lg md:text-xl text-foreground/70 max-w-3xl leading-relaxed">
                 21 student-run clubs and societies, one campus. Pick a lane,
                 meet the leads, and be part of something the whole university
@@ -143,9 +148,6 @@ function Index() {
               </p>
             </div>
 
-            {/* ========================= */}
-            {/* STATS */}
-            {/* ========================= */}
             <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-border border border-border max-w-4xl">
               <div className="bg-background p-6 md:p-8">
                 <div className="font-display text-5xl md:text-6xl text-primary">
@@ -178,7 +180,6 @@ function Index() {
               </div>
             </div>
 
-            {/* Apply Button */}
             <div className="mt-10">
               <button
                 type="button"
@@ -194,7 +195,6 @@ function Index() {
         {/* ========================= */}
         {/* INTRODUCTION */}
         {/* ========================= */}
-
         <section className="py-20 md:py-28 border-t border-border">
           <div className="max-w-5xl mx-auto px-6">
             <div className="grid md:grid-cols-[220px_1fr] gap-10 md:gap-16">
@@ -243,7 +243,6 @@ function Index() {
         {/* ========================= */}
         {/* WHY JOIN */}
         {/* ========================= */}
-
         <section className="py-20 md:py-28 bg-card">
           <div className="max-w-5xl mx-auto px-6">
             <div className="grid md:grid-cols-[220px_1fr] gap-10 md:gap-16">
@@ -336,7 +335,6 @@ function Index() {
         {/* ========================= */}
         {/* HOW TO CHOOSE */}
         {/* ========================= */}
-
         <section className="py-20 md:py-28">
           <div className="max-w-5xl mx-auto px-6">
             <div className="grid md:grid-cols-[220px_1fr] gap-10 md:gap-16">
@@ -437,7 +435,6 @@ function Index() {
         {/* ========================= */}
         {/* FEATURED */}
         {/* ========================= */}
-
         <section
           id="featured"
           className="py-20 md:py-28 bg-card"
@@ -520,7 +517,6 @@ function Index() {
         {/* ========================= */}
         {/* HOW TO JOIN */}
         {/* ========================= */}
-
         <section
           id="join"
           className="relative py-24 bg-primary text-primary-foreground overflow-hidden"
@@ -594,7 +590,6 @@ function Index() {
         {/* ========================= */}
         {/* FINAL CTA */}
         {/* ========================= */}
-
         <section className="py-20 bg-background border-t border-border">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <p className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
@@ -633,7 +628,6 @@ function Index() {
       {/* ========================= */}
       {/* FOOTER */}
       {/* ========================= */}
-
       <footer className="py-10 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -657,7 +651,6 @@ function Index() {
       {/* ========================= */}
       {/* APPLICATION FORM MODAL */}
       {/* ========================= */}
-
       {showApplyForm && (
         <div
           className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-6"
@@ -667,7 +660,6 @@ function Index() {
             className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-background border border-border p-8 md:p-10"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close */}
             <button
               type="button"
               onClick={() => setShowApplyForm(false)}
@@ -677,7 +669,6 @@ function Index() {
               ×
             </button>
 
-            {/* Form heading */}
             <div className="mb-8 pr-8">
               <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
                 Sai University
@@ -696,7 +687,6 @@ function Index() {
               </p>
             </div>
 
-            {/* Form */}
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -742,7 +732,6 @@ function Index() {
               }}
               className="space-y-6"
             >
-              {/* Student Name */}
               <div>
                 <label
                   htmlFor="student-name"
@@ -761,7 +750,6 @@ function Index() {
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label
                   htmlFor="student-email"
@@ -780,7 +768,6 @@ function Index() {
                 />
               </div>
 
-              {/* School */}
               <div>
                 <label
                   htmlFor="school"
@@ -811,7 +798,6 @@ function Index() {
                 </select>
               </div>
 
-              {/* Year */}
               <div>
                 <label
                   htmlFor="year"
@@ -849,7 +835,6 @@ function Index() {
                 </select>
               </div>
 
-              {/* Club / Society */}
               <div>
                 <label
                   htmlFor="club"
@@ -880,7 +865,6 @@ function Index() {
                 </select>
               </div>
 
-              {/* Experience */}
               <div>
                 <label
                   htmlFor="experience"
@@ -904,7 +888,6 @@ function Index() {
                 </p>
               </div>
 
-              {/* Submit */}
               <button
                 type="submit"
                 className="w-full bg-primary text-primary-foreground font-display tracking-wide py-4 text-base hover:opacity-90 transition"
