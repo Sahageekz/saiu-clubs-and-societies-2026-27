@@ -16,9 +16,12 @@ export function ClubDirectory() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
+
     return clubs.filter((c) => {
       if (category !== ALL && c.category !== category) return false;
+
       if (!q) return true;
+
       return (
         c.name.toLowerCase().includes(q) ||
         (c.about ?? "").toLowerCase().includes(q) ||
@@ -34,6 +37,7 @@ export function ClubDirectory() {
           <h2 className="font-display text-5xl uppercase leading-none">
             All <span className="text-primary">Clubs</span>
           </h2>
+
           <div className="border border-border px-4 py-2 flex items-center gap-2 bg-background">
             <input
               value={query}
@@ -45,24 +49,26 @@ export function ClubDirectory() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 text-sm mb-10">
-          {categories.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCategory(c)}
-              className={
-                category === c
-                  ? "bg-primary text-primary-foreground font-semibold px-4 py-1.5 -skew-x-12"
-                  : "border border-border px-4 py-1.5 -skew-x-12 hover:border-primary transition"
-              }
-            >
-              <span className="inline-block skew-x-12">{c}</span>
-            </button>
-          ))}
+        {/* Club Category Dropdown */}
+        <div className="mb-10">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full md:w-auto min-w-[320px] border border-border bg-background px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
+            aria-label="Select club category"
+          >
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
         </div>
 
         {filtered.length === 0 ? (
-          <p className="text-muted-foreground text-sm">No clubs match your search.</p>
+          <p className="text-muted-foreground text-sm">
+            No clubs match your search.
+          </p>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((club) => (
@@ -75,16 +81,25 @@ export function ClubDirectory() {
                   <span className="text-[11px] font-semibold tracking-[0.15em] text-primary uppercase">
                     {club.category}
                   </span>
-                  <span className="text-xs text-muted-foreground">{club.frequency}</span>
+
+                  <span className="text-xs text-muted-foreground">
+                    {club.frequency}
+                  </span>
                 </div>
-                <h3 className="font-display text-2xl uppercase">{club.name}</h3>
+
+                <h3 className="font-display text-2xl uppercase">
+                  {club.name}
+                </h3>
+
                 <p className="text-foreground/60 text-sm mt-2 line-clamp-3 flex-1">
                   {club.about}
                 </p>
+
                 <div className="mt-5 flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">
                     {club.whoCanApply ?? "Open to all"}
                   </span>
+
                   <span className="text-primary font-semibold text-sm group-hover:translate-x-1 transition">
                     View →
                   </span>
@@ -95,7 +110,13 @@ export function ClubDirectory() {
         )}
       </div>
 
-      {selected && <ClubDetail club={selected} onClose={() => setSelected(null)} />}
+      {selected && (
+        <ClubDetail
+          club={selected}
+          onClose={() => setSelected(null)}
+        />
+      )}
     </section>
   );
+}
 }
