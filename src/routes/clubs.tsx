@@ -27,7 +27,7 @@ function ClubsPage() {
               </span>
             </div>
             <span className="font-display tracking-wide text-lg">
-              SAIU CLUBS
+              SAIU CLUBS AND SOCIETIES
             </span>
           </a>
 
@@ -50,12 +50,12 @@ function ClubsPage() {
           <div className="flex items-center gap-3 mb-6">
             <span className="h-px w-10 bg-primary" />
             <span className="text-xs font-semibold tracking-[0.3em] text-primary uppercase">
-              Sai University · 2026–27
+              Sai University · 2026–2027
             </span>
           </div>
 
           <h1 className="font-display text-6xl md:text-8xl uppercase leading-[0.85]">
-            Our <span className="text-primary">Clubs</span>
+            Our <span className="text-primary">Clubs and Societies </span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-foreground/60 text-lg">
@@ -70,7 +70,7 @@ function ClubsPage() {
       <footer className="py-10 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-display tracking-wide">
-            SAIU CLUBS · 2026–27
+            SAIU CLUBS · 2026–2027
           </span>
 
           <p className="text-xs text-foreground/40">
