@@ -119,4 +119,3 @@ export function ClubDirectory() {
     </section>
   );
 }
-}
