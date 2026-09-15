@@ -1,135 +1,138 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
 
-export const Route = createFileRoute("/login")({
-  component: Login,
-});
+type LoginType = "student" | "management" | "club" | null;
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
+  const [selectedType, setSelectedType] = useState<LoginType>(null);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const handleContinue = () => {
+    if (!selectedType) return;
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setError("");
-    setLoading(true);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setLoading(false);
-
-    if (error) {
-      setError("Invalid email or password.");
+    if (selectedType === "management") {
+      navigate({ to: "/management-login" });
       return;
     }
 
-    navigate({ to: "/management" });
+    if (selectedType === "club") {
+      navigate({ to: "/club-login" });
+      return;
+    }
+
+    if (selectedType === "student") {
+      navigate({ to: "/student-login" });
+    }
   };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
-      <div className="w-full max-w-md">
-        <a
-          href="/"
-          className="inline-flex items-center gap-3 mb-10"
-        >
-          <div className="w-9 h-9 bg-primary grid place-items-center -skew-x-12">
-            <span className="skew-x-12 font-display text-primary-foreground text-lg">
-              S
-            </span>
+      <div className="w-full max-w-2xl">
+        <div className="border border-border bg-card p-8 md:p-10">
+          <div className="mb-10 text-center">
+            <p className="text-sm text-primary font-semibold tracking-widest">
+              SAI UNIVERSITY
+            </p>
+
+            <h1 className="text-3xl md:text-4xl font-bold mt-3">
+              LOGIN
+            </h1>
+
+            <p className="text-muted-foreground mt-3">
+              Select your account type to continue.
+            </p>
           </div>
 
-          <span className="font-display tracking-wide text-lg">
-            SAIU CLUBS AND SOCIETIES
-          </span>
-        </a>
+          <div className="grid gap-4">
+            <button
+              type="button"
+              onClick={() => setSelectedType("student")}
+              className={`w-full border p-6 text-left transition ${
+                selectedType === "student"
+                  ? "border-primary bg-primary/10"
+                  : "border-border hover:border-primary"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold">
+                    Student
+                  </h2>
 
-        <div className="border border-border bg-card p-8 md:p-10">
-          <span className="text-xs font-semibold tracking-[0.25em] text-primary uppercase">
-            SAI UNIVERSITY
-          </span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Login to your student account.
+                  </p>
+                </div>
 
-          <h1 className="font-display text-5xl uppercase leading-none mt-3">
-            Login
-          </h1>
-
-          <p className="text-foreground/60 text-sm mt-4">
-            Sign in to access the Clubs and Societies portal.
-          </p>
-
-          <form
-            onSubmit={handleLogin}
-            className="space-y-5 mt-8"
-          >
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold mb-2"
-              >
-                Email
-              </label>
-
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-semibold mb-2"
-              >
-                Password
-              </label>
-
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                className="w-full border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary"
-              />
-            </div>
-
-            {error && (
-              <div className="border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-                {error}
+                <span className="text-2xl">→</span>
               </div>
-            )}
+            </button>
 
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-primary text-primary-foreground font-display tracking-wide py-4 text-base hover:opacity-90 transition disabled:opacity-50"
+              type="button"
+              onClick={() => setSelectedType("management")}
+              className={`w-full border p-6 text-left transition ${
+                selectedType === "management"
+                  ? "border-primary bg-primary/10"
+                  : "border-border hover:border-primary"
+              }`}
             >
-              {loading ? "LOGGING IN..." : "LOGIN"}
-            </button>
-          </form>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold">
+                    Management / Student Council
+                  </h2>
 
-          <div className="mt-6">
-            <a
-              href="/"
-              className="text-sm text-foreground/50 hover:text-primary transition"
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Access applications and management information.
+                  </p>
+                </div>
+
+                <span className="text-2xl">→</span>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedType("club")}
+              className={`w-full border p-6 text-left transition ${
+                selectedType === "club"
+                  ? "border-primary bg-primary/10"
+                  : "border-border hover:border-primary"
+              }`}
             >
-              ← Back to home
-            </a>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold">
+                    Club President / Vice President
+                  </h2>
+
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Login using your official club email.
+                  </p>
+                </div>
+
+                <span className="text-2xl">→</span>
+              </div>
+            </button>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleContinue}
+            disabled={!selectedType}
+            className="w-full mt-8 bg-primary text-primary-foreground px-5 py-3 font-semibold hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            CONTINUE
+          </button>
+
+          <div className="mt-6 text-center">
+            <Link
+              to="/"
+              className="text-sm text-muted-foreground hover:text-primary transition"
+            >
+              ← Back to Home
+            </Link>
           </div>
         </div>
       </div>
