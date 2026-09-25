@@ -9,7 +9,9 @@ export const Route = createFileRoute("/management-login")({
 function ManagementLogin() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(
+    "studentcouncil.saiu@saiuniversity.edu.in"
+  );
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -23,22 +25,7 @@ function ManagementLogin() {
     try {
       const normalizedEmail = email.trim().toLowerCase();
 
-      const { data: managementUser, error: managementError } =
-        await supabase
-          .from("management_users")
-          .select("email, name")
-          .eq("email", normalizedEmail)
-          .maybeSingle();
-
-      if (managementError) {
-        throw managementError;
-      }
-
-      if (!managementUser) {
-        setError("This email is not authorized for management access.");
-        return;
-      }
-
+      // First authenticate the user.
       const { error: loginError } =
         await supabase.auth.signInWithPassword({
           email: normalizedEmail,
@@ -50,9 +37,39 @@ function ManagementLogin() {
         return;
       }
 
+      // Now that the user is authenticated, use the
+      // security-definer function to verify management access.
+      const { data: isManagement, error: managementError } =
+        await supabase.rpc("is_management_user");
+
+      if (managementError) {
+        console.error(managementError);
+
+        await supabase.auth.signOut();
+
+        setError(
+          "Unable to verify management access. Please try again."
+        );
+
+        return;
+      }
+
+      if (!isManagement) {
+        await supabase.auth.signOut();
+
+        setError(
+          "This account is not authorized for management access."
+        );
+
+        return;
+      }
+
       navigate({ to: "/management" });
     } catch (err: any) {
       console.error(err);
+
+      await supabase.auth.signOut();
+
       setError(
         err?.message || "Something went wrong. Please try again."
       );
@@ -89,7 +106,7 @@ function ManagementLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="studentcouncil@saiuniversity.edu.in"
+                placeholder="studentcouncil.saiu@saiuniversity.edu.in"
                 className="w-full border border-border bg-background px-4 py-3 outline-none focus:border-primary"
                 required
               />
