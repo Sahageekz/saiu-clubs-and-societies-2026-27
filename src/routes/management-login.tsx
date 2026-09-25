@@ -1,8 +1,12 @@
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/lib/supabase";
 
-export default function ManagementLogin() {
+export const Route = createFileRoute("/management-login")({
+  component: ManagementLogin,
+});
+
+function ManagementLogin() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -13,21 +17,48 @@ export default function ManagementLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setLoading(true);
     setError("");
+    setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email.trim().toLowerCase(),
-      password,
-    });
+    try {
+      const normalizedEmail = email.trim().toLowerCase();
 
-    if (error) {
-      setError("Invalid email or password.");
+      const { data: managementUser, error: managementError } =
+        await supabase
+          .from("management_users")
+          .select("email, name")
+          .eq("email", normalizedEmail)
+          .maybeSingle();
+
+      if (managementError) {
+        throw managementError;
+      }
+
+      if (!managementUser) {
+        setError("This email is not authorized for management access.");
+        return;
+      }
+
+      const { error: loginError } =
+        await supabase.auth.signInWithPassword({
+          email: normalizedEmail,
+          password,
+        });
+
+      if (loginError) {
+        setError("Invalid email or password.");
+        return;
+      }
+
+      navigate({ to: "/management" });
+    } catch (err: any) {
+      console.error(err);
+      setError(
+        err?.message || "Something went wrong. Please try again."
+      );
+    } finally {
       setLoading(false);
-      return;
     }
-
-    navigate({ to: "/management" });
   };
 
   return (
@@ -44,7 +75,7 @@ export default function ManagementLogin() {
             </h1>
 
             <p className="text-muted-foreground mt-3">
-              Login using your Management / Student Council credentials.
+              Login using your Management / Student Council account.
             </p>
           </div>
 
