@@ -1,27 +1,27 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+
+export const Route = createFileRoute("/login")({
+  component: LoginPage,
+});
 
 type LoginType = "student" | "management" | "club" | null;
 
-export default function Login() {
+function LoginPage() {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<LoginType>(null);
 
   const handleContinue = () => {
-    if (!selectedType) return;
+    if (selectedType === "student") {
+      navigate({ to: "/student-login" });
+    }
 
     if (selectedType === "management") {
       navigate({ to: "/management-login" });
-      return;
     }
 
     if (selectedType === "club") {
       navigate({ to: "/club-login" });
-      return;
-    }
-
-    if (selectedType === "student") {
-      navigate({ to: "/student-login" });
     }
   };
 
@@ -29,90 +29,72 @@ export default function Login() {
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
       <div className="w-full max-w-2xl">
         <div className="border border-border bg-card p-8 md:p-10">
-          <div className="mb-10 text-center">
+          <div className="mb-8">
             <p className="text-sm text-primary font-semibold tracking-widest">
               SAI UNIVERSITY
             </p>
 
-            <h1 className="text-3xl md:text-4xl font-bold mt-3">
+            <h1 className="text-3xl md:text-4xl font-bold mt-2">
               LOGIN
             </h1>
 
             <p className="text-muted-foreground mt-3">
-              Select your account type to continue.
+              Select the account type you want to access.
             </p>
           </div>
 
-          <div className="grid gap-4">
+          <div className="space-y-4">
             <button
               type="button"
               onClick={() => setSelectedType("student")}
-              className={`w-full border p-6 text-left transition ${
+              className={`w-full text-left border p-5 transition ${
                 selectedType === "student"
                   ? "border-primary bg-primary/10"
                   : "border-border hover:border-primary"
               }`}
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold">
-                    Student
-                  </h2>
+              <div className="font-semibold text-lg">
+                Student
+              </div>
 
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Login to your student account.
-                  </p>
-                </div>
-
-                <span className="text-2xl">→</span>
+              <div className="text-sm text-muted-foreground mt-1">
+                Login to your student account.
               </div>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedType("management")}
-              className={`w-full border p-6 text-left transition ${
+              className={`w-full text-left border p-5 transition ${
                 selectedType === "management"
                   ? "border-primary bg-primary/10"
                   : "border-border hover:border-primary"
               }`}
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold">
-                    Management / Student Council
-                  </h2>
+              <div className="font-semibold text-lg">
+                Management / Student Council
+              </div>
 
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Access applications and management information.
-                  </p>
-                </div>
-
-                <span className="text-2xl">→</span>
+              <div className="text-sm text-muted-foreground mt-1">
+                Access applications and club management.
               </div>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedType("club")}
-              className={`w-full border p-6 text-left transition ${
+              className={`w-full text-left border p-5 transition ${
                 selectedType === "club"
                   ? "border-primary bg-primary/10"
                   : "border-border hover:border-primary"
               }`}
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-semibold">
-                    Club President / Vice President
-                  </h2>
+              <div className="font-semibold text-lg">
+                Club President / Vice President
+              </div>
 
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Login using your official club email.
-                  </p>
-                </div>
-
-                <span className="text-2xl">→</span>
+              <div className="text-sm text-muted-foreground mt-1">
+                Login to manage your club.
               </div>
             </button>
           </div>
@@ -127,12 +109,12 @@ export default function Login() {
           </button>
 
           <div className="mt-6 text-center">
-            <Link
-              to="/"
-              className="text-sm text-muted-foreground hover:text-primary transition"
+            <a
+              href="/"
+              className="text-sm text-primary hover:underline"
             >
-              ← Back to Home
-            </Link>
+              ← Back to home
+            </a>
           </div>
         </div>
       </div>
